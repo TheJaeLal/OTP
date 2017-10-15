@@ -6,10 +6,12 @@ from selenium import webdriver
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.common.exceptions import NoSuchElementException
 import time,sys,os,platform
+from config import username,password
+import paths
 
 #Take email and password from command line
-email = sys.argv[1]
-password = sys.argv[2]
+#email = sys.argv[1]
+#password = sys.argv[2]
 
 
 #Returns the Path to appropriate GeckoDriver based on the type of system 
@@ -32,19 +34,28 @@ def find_system_driver():
 		raise Exception('Unknown Operating System or Platform Architecture!')
 
 def Set_Path_For_Firefox():
-	pwd = os.environ['PWD']
+	pwd = os.path.abspath(os.getcwd())
 	path_to_gecko = pwd+find_system_driver()
 	new_path = os.environ['PATH']+':'+path_to_gecko
 	os.environ['PATH'] = new_path
+	#print(new_path)
 
 def login(driver):
-	pass
+	user_el = driver.find_element_by_id("username")	
+	pass_el = driver.find_element_by_id("password")
 
+	user_el.send_keys(username)
+	pass_el.send_keys(password)
+
+	login_btn = driver.find_element_by_css_selector(paths.login_btn_css)
+
+	login_btn.click()
+	
 
 def main():
 
 	#Urls..
-	home_page = "http://www.160by2.com/Main.action?id="
+	home_page = "http://www.160by2.com/"
 
 	#Set the path to locate Gecko Driver for firefox..
 	Set_Path_For_Firefox()
@@ -52,6 +63,14 @@ def main():
 	driver = webdriver.Firefox()
 
 	driver.get(home_page)
+
+	if len(driver.window_handles)>1:
+		print("There is a popup indeed...")
+		driver.switch_to.window(driver.window_handles[-1])
+		driver.close()
+		driver.switch_to.window(driver.window_handles[0])
+	else:
+		print("No popups..")
 
 	login(driver)
 
