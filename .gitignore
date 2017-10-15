@@ -2,3 +2,4 @@ login.py
 *.log
 config.py
 *.pyc
+message.py

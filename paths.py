@@ -1,1 +1,5 @@
 login_btn_css=".ind-reg-but"
+mobile_no_input_ptag_class="sms-nu-inp"
+msg_input_id="sendSMSMsg"
+send_now_btn_id = "btnsendsms"
+send_later_btn_id = "sendlater"

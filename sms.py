@@ -7,6 +7,7 @@ from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.common.exceptions import NoSuchElementException
 import time,sys,os,platform
 from config import username,password
+import message
 import paths
 
 #Take email and password from command line
@@ -51,6 +52,15 @@ def login(driver):
 
 	login_btn.click()
 	
+def send_msg(driver,to,msg):
+	to_el = driver.find_element_by_class_name(paths.mobile_no_input_ptag_class).find_element_by_xpath("//input")
+	to_el.send_keys(to)
+
+	msg_el = driver.find_element_by_id(msg_input_id)
+	msg_el.send_keys(msg)
+
+	send_now_btn = driver.find_element_by_id(paths.send_now_btn_id)
+	send_now_btn.click()
 
 def main():
 
@@ -73,7 +83,12 @@ def main():
 		print("No popups..")
 
 	login(driver)
+	msg = "working"
+	to=username
 
+	time.sleep(2)
+	
+	send_msg(driver,message.to,message.msg)
 
 if __name__== "__main__":
 	main()
