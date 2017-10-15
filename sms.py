@@ -68,6 +68,24 @@ def send_msg(driver,to,msg):
 
 	send_now_btn = sms_box_el.find_element_by_xpath("//input[@id='btnsendsms']")
 	send_now_btn.click()
+def load_profile():
+	firefox_profile = webdriver.FirefoxProfile()
+
+	firefox_profile.add_extension(os.path.join(os.path.abspath(os.getcwd()),'extension','quick_java.xpi'))
+
+	## Prevents loading the 'thank you for installing screen'
+	firefox_profile.set_preference('thatoneguydotnet.QuickJava.curVersion', '2.1.2')
+
+	## Turns images off
+	firefox_profile.set_preference('thatoneguydotnet.QuickJava.startupStatus.Images', 2)
+
+	## Turns animated images off
+	firefox_profile.set_preference('thatoneguydotnet.QuickJava.startupStatus.AnimatedImage', 2)
+
+	driver = webdriver.Firefox(firefox_profile)
+
+	return driver
+
 
 def main():
 
@@ -77,7 +95,7 @@ def main():
 	#Set the path to locate Gecko Driver for firefox..
 	Set_Path_For_Firefox()
 
-	driver = webdriver.Firefox()
+	driver = load_profile()
 
 	driver.get(home_page)
 
@@ -94,6 +112,9 @@ def main():
 	time.sleep(2)
 
 	send_msg(driver,message.to,message.msg)
+	
+	time.sleep(10)
+
 	driver.quit()
 
 if __name__== "__main__":
