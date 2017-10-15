@@ -53,13 +53,20 @@ def login(driver):
 	login_btn.click()
 	
 def send_msg(driver,to,msg):
-	to_el = driver.find_element_by_class_name(paths.mobile_no_input_ptag_class).find_element_by_xpath("//input")
+
+	iframe_el = driver.find_element_by_xpath(xpath="//iframe[@id='by2Frame']")
+
+	driver.switch_to.frame(frame_reference=iframe_el)
+
+	sms_box_el = driver.find_element_by_class_name(paths.sms_box_class)
+
+	to_el = sms_box_el.find_element_by_xpath("//input[@placeholder='Enter Mobile Number or Name']")
 	to_el.send_keys(to)
 
-	msg_el = driver.find_element_by_id(msg_input_id)
+	msg_el = sms_box_el.find_element_by_id(paths.msg_input_id)
 	msg_el.send_keys(msg)
 
-	send_now_btn = driver.find_element_by_id(paths.send_now_btn_id)
+	send_now_btn = sms_box_el.find_element_by_xpath("//input[@id='btnsendsms']")
 	send_now_btn.click()
 
 def main():
@@ -83,12 +90,11 @@ def main():
 		print("No popups..")
 
 	login(driver)
-	msg = "working"
-	to=username
 
 	time.sleep(2)
-	
+
 	send_msg(driver,message.to,message.msg)
+	driver.quit()
 
 if __name__== "__main__":
 	main()

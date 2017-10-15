@@ -1,4 +1,6 @@
 login_btn_css=".ind-reg-but"
+iframe_id="by2Frame"
+sms_box_class="sms-box"
 mobile_no_input_ptag_class="sms-nu-inp"
 msg_input_id="sendSMSMsg"
 send_now_btn_id = "btnsendsms"
