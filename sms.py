@@ -77,9 +77,7 @@ def load_profile():
 
 	chrome_options = Options()
 	chrome_options.add_argument("--headless")
-	#chrome_options.add_extension(os.path.join('extension','adblock_plus_1_13_5.crx'))
 	driver = webdriver.Chrome(chrome_options=chrome_options)
-
 	return driver
 
 
@@ -102,11 +100,14 @@ def send(to,msg):
 		print("No popups..")
 
 	login(driver)
-
+	
+	#Wait for dashboard to load
 	time.sleep(4)
 
 	send_msg(driver,to,msg)
 	
+	#Wait for message to be sent
 	time.sleep(5)
 	
+	#Exit chrome 
 	driver.quit()
