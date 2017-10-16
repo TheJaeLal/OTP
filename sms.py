@@ -86,7 +86,7 @@ def load_profile():
 	return driver
 
 
-def send_sms(to,msg):
+def send(to,msg):
 
 	#Urls..
 	home_page = "http://www.160by2.com/"
