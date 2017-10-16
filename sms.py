@@ -2,17 +2,14 @@
 Install selenium
 sudo pip3 install selenium
 """
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-
 from selenium.common.exceptions import NoSuchElementException
 import time,sys,os,platform
 from config import username,password
 import paths
 
-#Take email and password from command line
-#email = sys.argv[1]
-#password = sys.argv[2]
 
 
 #Returns the Path to appropriate ChromeDriver based on the type of system 
