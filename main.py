@@ -9,6 +9,9 @@ otp_size = 5
 target = sys.argv[1]
 
 def main():
+	
+	print("Generating OTP, Please wait......")
+
 	#Get new otp
 	new_otp = otp.generate(otp_size)
 	
@@ -17,6 +20,15 @@ def main():
 	
 	#Send the message
 	sms.send(target,msg)
+
+	input_otp = input("Enter the OTP Received: ")
+
+	if input_otp==new_otp:
+		print("\n************Access Granted************\n")
+	else:
+		print("Error, Wrong OTP entered!!")
+		print("\n------------Access Denied-------------\n")
+
 
 if __name__=='__main__':
 	main()

@@ -39,7 +39,7 @@ def Set_Path_For_Chrome():
 	#print(new_path)
 
 def handle_popup(driver):
-	print("There is a popup indeed...")
+	#print("There is a popup indeed...")
 	driver.switch_to.window(driver.window_handles[-1])
 	driver.close()
 	driver.switch_to.window(driver.window_handles[0])
@@ -71,7 +71,7 @@ def send_msg(driver,to,msg):
 
 	send_now_btn = sms_box_el.find_element_by_xpath("//input[@id='btnsendsms']")
 	send_now_btn.click()
-	print("Send Now, button has been clicked...")
+	#print("Send Now, button has been clicked...")
 
 def load_profile():
 
@@ -97,7 +97,8 @@ def send(to,msg):
 	if len(driver.window_handles)>1:
 		handle_popup(driver)
 	else:
-		print("No popups..")
+		pass
+		#print("No popups..")
 
 	login(driver)
 	
